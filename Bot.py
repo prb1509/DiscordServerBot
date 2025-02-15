@@ -190,44 +190,44 @@ async def show_counter(ctx,*usernames):
 async def help(ctx,command_name=None):
     if command_name == None:
         message = """Hello! This is a simple bot that keeps track of the number of messages posted in this server.
-                    Use / as a prefix to send a command. Commands are entirely case insensitive. The available commands are as follows:
-                    serverstats
-                    indstats
-                    fixcounter
-                    showcounter
-                    To find out more about these commands you can type /help 'command'.
+        Use / as a prefix to send a command. Commands are entirely **case insensitive**. The available commands are as follows:
+        *serverstats*
+        *indstats*
+        *fixcounter*
+        *showcounter*
+        To find out more about these commands you can type /help 'command'.
                     
-                    Found a bug? Oops!"""
+        Found a bug? Oops!"""
         
     elif command_name == "serverstats":
         message = """A command to plot the message frequency of this server between 2023 and the current time.
         
-                    Usage: /serverstats"""
+        **Usage**: /serverstats"""
         
     elif command_name == "indstats":
         message = """A command to plot the message frequency of this a discord user between 2023 and the current time.
         
-                    Usage: /indstats username
+        **Usage**: /indstats username
                     
-                    Options: 
-                    username (optional) - discord username (the thing that originally had a 4 digit number)"""
+        **Options**: 
+        username (*optional*) - discord username (the thing that originally had a 4 digit number)"""
         
     elif command_name == "showcounter":
         message = """A command to show the message count of discord user(s).
         
-                    Usage: /showcounter usernames
+        **Usage**: /showcounter usernames
                     
-                    Options: 
-                    usernames (required) - discord usernames (the thing that originally had a 4 digit number); must be separated by a space"""
+        **Options**: 
+        usernames (*required*) - discord usernames (the thing that originally had a 4 digit number); must be separated by a space"""
         
     elif command_name == "fixcounter":
         message = """A command to assign a different message count to a discord user.
         
-                    Usage: /fixcounter count username
-                    
-                    Options: 
-                    count (required) - the new message count 
-                    username (optional) - discord username (the thing that originally had a 4 digit number)"""
+        **Usage**: /fixcounter count username
+        
+        **Options**: 
+        count (*required*) - the new message count 
+        username (*optional*) - discord username (the thing that originally had a 4 digit number)"""
     
     elif command_name == "info":
         message = """Haha very funny. The help command is self explanatory. If you cannot figure it out then too bad."""
