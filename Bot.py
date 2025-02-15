@@ -190,14 +190,14 @@ async def show_counter(ctx,*usernames):
 async def help(ctx,command_name=None):
     if command_name == None:
         message = """Hello! This is a simple bot that keeps track of the number of messages posted in this server.
-        Use / as a prefix to send a command. Commands are entirely **case insensitive**. The available commands are as follows:
-        *serverstats*
-        *indstats*
-        *fixcounter*
-        *showcounter*
-        To find out more about these commands you can type /help 'command'.
-                    
-        Found a bug? Oops!"""
+Use / as a prefix to send a command. Commands are entirely **case insensitive**. The available commands are as follows:
+*serverstats*
+*indstats*
+*fixcounter*
+*showcounter*
+To find out more about these commands you can type /help 'command'.
+            
+Found a bug? Oops!"""
         
     elif command_name == "serverstats":
         message = """A command to plot the message frequency of this server between 2023 and the current time.
