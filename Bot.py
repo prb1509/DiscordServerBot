@@ -197,7 +197,7 @@ Use / as a prefix to send a command. Commands are entirely **case insensitive**.
 * fixcounter
 * showcounter
 
-To find out more about these commands you can type /help 'command'.
+To find out more about these commands you can type /info 'command'.
             
 Found a bug? Oops!"""
         
