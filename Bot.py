@@ -238,7 +238,7 @@ count (*required*) - the new message count
 username (*optional*) - discord username (the thing that originally had a 4 digit number)"""
     
     elif command_name == "info":
-        message = """Haha very funny. The help command is self explanatory. If you cannot figure it out then too bad."""
+        message = """Haha very funny. The command is self explanatory. If you cannot figure it out then too bad."""
 
     else:
         message = """I do not understand what you mean. I am afraid I cannot help you. Please try again."""
