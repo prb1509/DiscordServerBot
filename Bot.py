@@ -186,7 +186,7 @@ async def show_counter(ctx,*usernames):
             await ctx.send(f"{username} has sent {counter[username]} messages!")
 
 
-@client.command(name="help")
+@client.command(name="info")
 async def help(ctx,command_name=None):
     if command_name == None:
         message = """Hello! This is a simple bot that keeps track of the number of messages posted in this server.
@@ -229,7 +229,7 @@ async def help(ctx,command_name=None):
                     count (required) - the new message count 
                     username (optional) - discord username (the thing that originally had a 4 digit number)"""
     
-    elif command_name == "help":
+    elif command_name == "info":
         message = """Haha very funny. The help command is self explanatory. If you cannot figure it out then too bad."""
 
     else:
