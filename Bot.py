@@ -175,6 +175,7 @@ async def fix_counter(ctx,count,username=None):
     if username == None:
         username = ctx.author.name
     counter[username] = int(count)
+    save_counter_data(COUNTER_DATA,counter)
     await ctx.send(f"Counter fixed!")
 
 
