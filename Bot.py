@@ -219,7 +219,7 @@ Found a bug? Oops!"""
 username (*optional*) - discord username (the thing that originally had a 4 digit number)"""
         
     elif command_name == "showcounter":
-        message = """A command to show the message count of discord user(s).
+        message = """A command to show the message count of discord user(s). Note that some deleted messages may be tracked. See fixcounter to solve.
         
 **Usage**: 
 /showcounter usernames
