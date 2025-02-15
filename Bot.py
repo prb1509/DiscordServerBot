@@ -79,6 +79,7 @@ def create_plotting_df(df,individual=False,username=None):
 def time_series_plot(df,individual=False,username=None):
     df = df[df["Year"] != 2022]
     plotting_df = create_plotting_df(df)
+    print(df)
     sns.set_theme()
     plt.clf() # The figure seems to retain its history if this isn't called to clear it
     plot = plt.figure()
@@ -145,6 +146,7 @@ async def time_series_server(ctx):
     figure.savefig(filename)
     image = discord.File(filename)
     save_message_data(df,MESSAGE_DATA)
+    print(df)
     await ctx.send(f"Huff Puff! Number crunching is a lot of work!\n",file=image)
 
 
@@ -204,12 +206,14 @@ Found a bug? Oops!"""
     elif command_name == "serverstats":
         message = """A command to plot the message frequency of this server between 2023 and the current time.
         
-**Usage**: /serverstats"""
+**Usage**: 
+/serverstats"""
         
     elif command_name == "indstats":
         message = """A command to plot the message frequency of this a discord user between 2023 and the current time.
         
-**Usage**: /indstats username
+**Usage**: 
+/indstats username
             
 **Options**: 
 username (*optional*) - discord username (the thing that originally had a 4 digit number)"""
@@ -217,7 +221,8 @@ username (*optional*) - discord username (the thing that originally had a 4 digi
     elif command_name == "showcounter":
         message = """A command to show the message count of discord user(s).
         
-**Usage**: /showcounter usernames
+**Usage**: 
+/showcounter usernames
             
 **Options**: 
 usernames (*required*) - discord usernames (the thing that originally had a 4 digit number); must be separated by a space"""
@@ -225,7 +230,8 @@ usernames (*required*) - discord usernames (the thing that originally had a 4 di
     elif command_name == "fixcounter":
         message = """A command to assign a different message count to a discord user.
         
-**Usage**: /fixcounter count username
+**Usage**: 
+/fixcounter count username
 
 **Options**: 
 count (*required*) - the new message count 
