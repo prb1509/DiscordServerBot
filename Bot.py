@@ -192,10 +192,10 @@ async def help(ctx,command_name=None):
         message = """Hello! This is a simple bot that keeps track of the number of messages posted in this server.
 Use / as a prefix to send a command. Commands are entirely **case insensitive**. The available commands are as follows:
 
-*serverstats
-*indstats
-*fixcounter
-*showcounter
+* serverstats
+* indstats
+* fixcounter
+* showcounter
 
 To find out more about these commands you can type /help 'command'.
             
