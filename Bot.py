@@ -88,9 +88,9 @@ def time_series_plot(df,individual=False,username=None,channel=None):
     plot = plt.figure()
     plot = sns.lineplot(x=plotting_df['Month'], y=plotting_df["n_message"], hue=plotting_df['Year'])
     if individual:
-        plot.set(ylabel="Number of Messages",title=f"{username}'s Message Count")
+        plot.set(ylabel="Number of Messages",title=f"{username}'s message ount")
     elif channel != None:
-        plot.set(ylabel="Number of Messages",title=f"{channel}'s Message Count")
+        plot.set(ylabel="Number of Messages",title=f"{channel}'s message count")
     else:
         plot.set(ylabel="Number of Messages")
     figure = plot.get_figure()
