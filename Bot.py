@@ -220,11 +220,15 @@ async def show_counter(ctx,*usernames):
         await ctx.send(f"You have sent {counter[username]} messages!")
     else:
         for username in usernames:
+            username = username.lower()
             await ctx.send(f"{username} has sent {counter[username]} messages!")
 
 
 @client.command(name="info")
 async def help(ctx,command_name=None):
+    if command_name != None:
+        command_name = command_name.lower()
+        
     if command_name == None:
         message = """Hello! This is a simple bot that keeps track of the number of messages posted in this server.
 Use / as a prefix to send a command. Commands are entirely **case insensitive**. The available commands are as follows:
