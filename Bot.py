@@ -144,7 +144,7 @@ async def get_all_members():
 @client.command(name="resetmsg")
 async def reset_message_data(ctx):
     await ctx.send("Rerunning over all messages.")
-    message_data = get_all_messages(full=True)
+    message_data = pd.DataFrame(await get_all_messages(full=True))
     save_message_data(message_data,MESSAGE_DATA)
     await ctx.send("Finished rewriting the data.")
 
