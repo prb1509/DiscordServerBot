@@ -101,9 +101,9 @@ def get_last_message_time(df):
     return datetime(year,month,day)
 
 
-async def get_all_messages():
+async def get_all_messages(full=False):
     message_data = pd.DataFrame(json.loads(load_data(MESSAGE_DATA))).transpose()
-    if len(message_data) == 0 :
+    if len(message_data) == 0 or full:
         last_message_time = None
     else:
         last_message_time = get_last_message_time(message_data)
@@ -137,6 +137,14 @@ async def get_all_members():
     members_username = [member.name for member in client.get_all_members()]
     members_global_name = [member.global_name for member in client.get_all_members()]
     return members_username, members_global_name
+
+
+@client.command(name="resetmsg")
+async def reset_message_data(ctx):
+    await ctx.send("Rerunning over all messages.")
+    message_data = get_all_messages(full=True)
+    save_message_data(message_data,MESSAGE_DATA)
+    await ctx.send("Finished rewriting the data.")
 
 
 @client.command(name="serverstats")
@@ -202,6 +210,7 @@ Use / as a prefix to send a command. Commands are entirely **case insensitive**.
 * indstats
 * fixcounter
 * showcounter
+* resetmsg
 
 To find out more about these commands you can type /info 'command'.
             
@@ -243,6 +252,12 @@ username (*optional*) - discord username (the thing that originally had a 4 digi
     
     elif command_name == "info":
         message = """Haha very funny. The command is self explanatory. If you cannot figure it out then too bad."""
+
+    elif command_name == "resetmsg":
+        message = """A command to reset and recompute the message data. **WARNING**: This will take a lot of time.
+    
+**Usage**:
+/resetmsg"""
 
     else:
         message = """I do not understand what you mean. I am afraid I cannot help you. Please try again."""
