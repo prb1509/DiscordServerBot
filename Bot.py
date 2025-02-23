@@ -80,7 +80,7 @@ def create_plotting_df(df,individual=False,username=None):
 def time_series_plot(df,individual=False,username=None):
     df = df[df["Year"] != 2022]
     plotting_df = create_plotting_df(df)
-    print(df)
+    print(plotting_df)
     sns.set_theme()
     plt.clf() # The figure seems to retain its history if this isn't called to clear it
     plot = plt.figure()
