@@ -174,6 +174,8 @@ async def time_series_individual(ctx,username=None):
     save_message_data(df,MESSAGE_DATA)
     if username == None:
         username = ctx.author.name
+    else:
+        username = username.lower()
     if username not in np.unique(df["Author"]):
         await ctx.send("No such member found. Better luck next time!")
     else:
@@ -187,6 +189,7 @@ async def time_series_individual(ctx,username=None):
 
 @client.command(name="channelstats")
 async def time_series_channel(ctx,channel):
+    channel = channel.lower()
     await ctx.send("Working on it. Please be patient.")
     df = pd.DataFrame(await get_all_messages())
     save_message_data(df,MESSAGE_DATA)
