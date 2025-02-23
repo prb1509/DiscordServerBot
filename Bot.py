@@ -130,6 +130,8 @@ async def get_all_messages(full=False):
             new_data["channel"].append(channel)
 
     new_data = pd.DataFrame(new_data)
+    if full:
+        return new_data
     return pd.concat([message_data,new_data]).drop_duplicates()
 
 
