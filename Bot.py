@@ -261,12 +261,16 @@ async def on_message(message):
         counter[message.author.name] = 0
     counter[message.author.name] += 1
     await client.process_commands(message)
-    if counter[message.author.name] % 10000 == 0:
-        await message.channel.send(f"Hey {message.author.mention} you're on fire! That's another 10000 messages!")
+    if counter[message.author.name] % 100000 == 0:
+        await message.channel.send(f"Wow {message.author.mention}! Who would have thought you'd hit {counter[message.author.name]} messages?")
+    elif counter[message.author.name] % 10000 == 0:
+        if counter[message.author.name] != 10000:
+            await message.channel.send(f"Hey {message.author.mention} you're on fire! That's another 10000 messages!")
+        else: 
+            await message.channel.send(f"Welcome to the 10k club {message.author.mention}!")
     elif counter[message.author.name] % 1000 == 0:
         await message.channel.send(f"Hey {message.author.mention}. Looks like another 1000 messages. Nice?!?")
-    elif counter[message.author.name] % 100000 == 0:
-        await message.channel.send(f"Wow {message.author.mention}! Who would have thought you'd hit {counter[message.author.name]} messages?")
+        
     # Save reasonably frequently
     if counter[message.author.name] % 100 == 0:
         save_counter_data(COUNTER_DATA,counter)
