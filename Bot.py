@@ -68,16 +68,18 @@ def drop_future_months(df):
     return df.drop([i for i in range(month_diff,n_rows)])
 
 
-def create_plotting_df(df,individual=False,username=None):
+def create_plotting_df(df,individual=False,username=None,channel=None):
     if individual:
         plotting_df = fix_dataframe(df,username).groupby(["Year","Month"]).count().unstack(fill_value=0).stack().reset_index()
+    elif channel != None:
+        plotting_df = df.groupby(["Year","Month"]).count().unstack(fill_value=0).stack().reset_index()
     else:
         plotting_df = df.groupby(["Year","Month"]).count().unstack(fill_value=0).stack().reset_index()
     plotting_df = drop_future_months(plotting_df)
     return plotting_df
 
 
-def time_series_plot(df,individual=False,username=None):
+def time_series_plot(df,individual=False,username=None,channel=None):
     df = df[df["Year"] != 2022]
     plotting_df = create_plotting_df(df)
     print(plotting_df)
@@ -87,6 +89,8 @@ def time_series_plot(df,individual=False,username=None):
     plot = sns.lineplot(x=plotting_df['Month'], y=plotting_df["n_message"], hue=plotting_df['Year'])
     if individual:
         plot.set(ylabel="Number of Messages",title=f"{username}'s Message Count")
+    elif channel != None:
+        plot.set(ylabel="Number of Messages",title=f"{channel}'s Message Count")
     else:
         plot.set(ylabel="Number of Messages")
     figure = plot.get_figure()
@@ -180,6 +184,18 @@ async def time_series_individual(ctx,username=None):
         await ctx.send(f"Huff Puff! Number crunching is a lot of work!\n.",file=image)
 
 
+@client.command(name="channelstats")
+async def time_series_channel(ctx,channel):
+    await ctx.send("Working on it. Please be patient.")
+    df = pd.DataFrame(await get_all_messages())
+    df = df[df["channel"] ==  channel]
+    figure = time_series_plot(df,individual=False,channel=channel)
+    filename = "Individual.png"
+    figure.savefig(filename)
+    image = discord.File(filename)
+    await ctx.send(f"Huff Puff! Number crunching is a lot of work!\n.",file=image)
+
+
 @client.command(name="fixcounter")
 async def fix_counter(ctx,count,username=None):
     if ctx.author.name not in (username,"f_ms_outlook"):
@@ -210,6 +226,7 @@ Use / as a prefix to send a command. Commands are entirely **case insensitive**.
 
 * serverstats
 * indstats
+* channelstats
 * fixcounter
 * showcounter
 * resetmsg
@@ -225,13 +242,22 @@ Found a bug? Oops!"""
 /serverstats"""
         
     elif command_name == "indstats":
-        message = """A command to plot the message frequency of this a discord user between 2023 and the current time.
+        message = """A command to plot the message frequency of a discord user between 2023 and the current time.
         
 **Usage**: 
 /indstats username
             
 **Options**: 
 username (*optional*) - discord username (the thing that originally had a 4 digit number)"""
+
+    elif command_name == "channelstats":
+        message = """A command to plot the message frequency of a channel between 2023 and the current time.
+        
+**Usage**: 
+/channelstats channel
+            
+**Options**: 
+channel - discord channel"""
         
     elif command_name == "showcounter":
         message = """A command to show the message count of discord user(s). Note that some deleted messages may be tracked. See fixcounter to solve.
