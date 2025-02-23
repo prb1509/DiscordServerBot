@@ -102,7 +102,7 @@ def get_last_message_time(df):
     year = int(last_message["Year"][0])
     month = int(last_message["Month"][0])
     day = int(last_message["Day"][0])
-    return datetime(year,month,day)
+    return datetime(year,month,1)
 
 
 async def get_all_messages(full=False):
@@ -171,6 +171,7 @@ async def time_series_server(ctx):
 async def time_series_individual(ctx,username=None):
     await ctx.send("Working on it. Please be patient.")
     df = pd.DataFrame(await get_all_messages())
+    save_message_data(df,MESSAGE_DATA)
     if username == None:
         username = ctx.author.name
     if username not in np.unique(df["Author"]):
@@ -188,9 +189,10 @@ async def time_series_individual(ctx,username=None):
 async def time_series_channel(ctx,channel):
     await ctx.send("Working on it. Please be patient.")
     df = pd.DataFrame(await get_all_messages())
+    save_message_data(df,MESSAGE_DATA)
     df = df[df["channel"] ==  channel]
     figure = time_series_plot(df,individual=False,channel=channel)
-    filename = "Individual.png"
+    filename = "Channel.png"
     figure.savefig(filename)
     image = discord.File(filename)
     await ctx.send(f"Huff Puff! Number crunching is a lot of work!\n.",file=image)
