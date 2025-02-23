@@ -94,9 +94,10 @@ def time_series_plot(df,individual=False,username=None):
 
 
 def get_last_message_time(df):
-    year = int(df["Year"][0])
-    month = int(df["Month"][0])
-    day = int(df["Day"][0])
+    last_message = df[df["id"] == df["id"].max()]
+    year = int(last_message["Year"][0])
+    month = int(last_message["Month"][0])
+    day = int(last_message["Day"][0])
     return datetime(year,month,day)
 
 
@@ -142,6 +143,7 @@ async def get_all_members():
 async def time_series_server(ctx):
     await ctx.send("Working on it. Please be patient.")
     df = pd.DataFrame(await get_all_messages())
+    df = df.drop_duplicates()
     figure = time_series_plot(df)
     filename = "Server.png"
     figure.savefig(filename)
