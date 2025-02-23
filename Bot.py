@@ -64,7 +64,8 @@ def drop_future_months(df):
     current_year = now.year
     current_month = now.month
     month_diff = 12 * (current_year - 2023) + current_month
-    return df[month_diff]
+    n_rows = df.shape[0]
+    return df.drop([i for i in range(month_diff,n_rows)])
 
 
 def create_plotting_df(df,individual=False,username=None):
@@ -93,9 +94,9 @@ def time_series_plot(df,individual=False,username=None):
 
 
 def get_last_message_time(df):
-    year = int(df["Year"][-1])
-    month = int(df["Month"][-1])
-    day = int(df["Day"][-1])
+    year = int(df["Year"][0])
+    month = int(df["Month"][0])
+    day = int(df["Day"][0])
     return datetime(year,month,day)
 
 
