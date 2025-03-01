@@ -81,6 +81,7 @@ def create_plotting_df(df,individual=False,username=None,channel=None):
 
 def time_series_plot(df,individual=False,username=None,channel=None):
     df = df[df["Year"] != 2022]
+    df = df.drop_duplicates()
     plotting_df = create_plotting_df(df)
     print("---------------")
     print("Displaying the grouped data frame:")
