@@ -1,5 +1,5 @@
 import discord
-from datetime import datetime
+import datetime
 import json
 import os
 import discord.ext.commands
@@ -60,7 +60,7 @@ def fix_dataframe(df,username):
 def drop_future_months(df):
     # When ungrouping and filling the dataframes, all months of the current year are filled, so future months are filled with 0
     # This just drops the months beyond the current month
-    now = datetime.now()
+    now = datetime.datetime.now()
     current_year = now.year
     current_month = now.month
     month_diff = 12 * (current_year - 2023) + current_month
@@ -82,7 +82,10 @@ def create_plotting_df(df,individual=False,username=None,channel=None):
 def time_series_plot(df,individual=False,username=None,channel=None):
     df = df[df["Year"] != 2022]
     plotting_df = create_plotting_df(df)
+    print("---------------")
+    print("Displaying the grouped data frame:")
     print(plotting_df)
+    print("---------------")
     sns.set_theme()
     plt.clf() # The figure seems to retain its history if this isn't called to clear it
     plot = plt.figure()
@@ -102,7 +105,7 @@ def get_last_message_time(df):
     year = int(last_message["Year"][0])
     month = int(last_message["Month"][0])
     day = int(last_message["Day"][0])
-    return datetime(year,month,1)
+    return datetime.datetime(year,month,day) - datetime.timedelta(1)
 
 
 async def get_all_messages(full=False):
@@ -135,8 +138,13 @@ async def get_all_messages(full=False):
 
     new_data = pd.DataFrame(new_data)
     if full:
-        return new_data
-    return pd.concat([message_data,new_data]).drop_duplicates()
+        df = new_data
+        # return new_data
+    else:
+        df = pd.concat([message_data,new_data])
+        df = df.drop_duplicates()
+    return df.drop_duplicates()
+    # return pd.concat([message_data,new_data]).drop_duplicates()
 
 
 async def get_all_members():
@@ -163,7 +171,6 @@ async def time_series_server(ctx):
     figure.savefig(filename)
     image = discord.File(filename)
     save_message_data(df,MESSAGE_DATA)
-    print(df)
     await ctx.send(f"Huff Puff! Number crunching is a lot of work!\n",file=image)
 
 
@@ -228,7 +235,7 @@ async def show_counter(ctx,*usernames):
 async def help(ctx,command_name=None):
     if command_name != None:
         command_name = command_name.lower()
-        
+
     if command_name == None:
         message = """Hello! This is a simple bot that keeps track of the number of messages posted in this server.
 Use / as a prefix to send a command. Commands are entirely **case insensitive**. The available commands are as follows:
