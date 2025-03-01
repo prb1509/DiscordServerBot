@@ -81,7 +81,7 @@ def create_plotting_df(df,individual=False,username=None,channel=None):
 
 def time_series_plot(df,individual=False,username=None,channel=None):
     df = df[df["Year"] != 2022]
-    df = df.drop_duplicates()
+    # df = df.drop_duplicates()
     plotting_df = create_plotting_df(df)
     print("---------------")
     print("Displaying the grouped data frame:")
@@ -138,6 +138,7 @@ async def get_all_messages(full=False):
             new_data["channel"].append(channel)
 
     new_data = pd.DataFrame(new_data)
+    new_data["channel"] = new_data['channel'].astype(str)
     if full:
         df = new_data
         # return new_data
@@ -166,7 +167,7 @@ async def reset_message_data(ctx):
 async def time_series_server(ctx):
     await ctx.send("Working on it. Please be patient.")
     df = pd.DataFrame(await get_all_messages())
-    df = df.drop_duplicates()
+    # df = df.drop_duplicates()
     figure = time_series_plot(df)
     filename = "Server.png"
     figure.savefig(filename)
