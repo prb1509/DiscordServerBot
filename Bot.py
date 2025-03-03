@@ -92,7 +92,7 @@ def time_series_plot(df,individual=False,username=None,channel=None):
     plot = plt.figure()
     plot = sns.lineplot(x=plotting_df['Month'], y=plotting_df["n_message"], hue=plotting_df['Year'])
     if individual:
-        plot.set(ylabel="Number of Messages",title=f"{username}'s message ount")
+        plot.set(ylabel="Number of Messages",title=f"{username}'s message count")
     elif channel != None:
         plot.set(ylabel="Number of Messages",title=f"{channel}'s message count")
     else:
@@ -191,7 +191,7 @@ async def time_series_individual(ctx,username=None):
         filename = "Individual.png"
         figure.savefig(filename)
         image = discord.File(filename)
-        await ctx.send(f"Huff Puff! Number crunching is a lot of work!\n.",file=image)
+        await ctx.send(f"Huff Puff! Number crunching is a lot of work!\n",file=image)
 
 
 @client.command(name="channelstats")
@@ -324,17 +324,23 @@ async def on_message(message):
     counter[message.author.name] += 1
     await client.process_commands(message)
     if counter[message.author.name] % 100000 == 0:
-        await message.channel.send(f"Wow {message.author.mention}! Who would have thought you'd hit {counter[message.author.name]} messages?")
+        if counter[message.author.name] != 100000:
+            await message.channel.send(f"Wow {message.author.mention}! Who would have thought you'd hit {counter[message.author.name]} messages?")
+        else:
+            await message.channel.send(f"Welcome to the 100k club {message.author.mention}!")
     elif counter[message.author.name] % 10000 == 0:
         if counter[message.author.name] != 10000:
             await message.channel.send(f"Hey {message.author.mention} you're on fire! That's another 10000 messages!")
         else: 
             await message.channel.send(f"Welcome to the 10k club {message.author.mention}!")
     elif counter[message.author.name] % 1000 == 0:
-        await message.channel.send(f"Hey {message.author.mention}. Looks like another 1000 messages. Nice?!?")
+        if counter[message.author.name] != 1000:
+            await message.channel.send(f"Hey {message.author.mention}. Looks like another 1000 messages. Nice?!?")
+        else:
+            await message.channel.send(f"Welcome to the 1k club {message.author.mention}!")
         
     # Save reasonably frequently
-    if counter[message.author.name] % 100 == 0:
+    if counter[message.author.name] % 25 == 0:
         save_counter_data(COUNTER_DATA,counter)
 
 
