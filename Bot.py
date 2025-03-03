@@ -83,10 +83,10 @@ def time_series_plot(df,individual=False,username=None,channel=None):
     df = df[df["Year"] != 2022]
     # df = df.drop_duplicates()
     plotting_df = create_plotting_df(df)
-    print("---------------")
+    print("---------------------------------------------------------")
     print("Displaying the grouped data frame:")
     print(plotting_df)
-    print("---------------")
+    print("---------------------------------------------------------")
     sns.set_theme()
     plt.clf() # The figure seems to retain its history if this isn't called to clear it
     plot = plt.figure()
@@ -141,12 +141,10 @@ async def get_all_messages(full=False):
     new_data["channel"] = new_data['channel'].astype(str)
     if full:
         df = new_data
-        # return new_data
     else:
         df = pd.concat([message_data,new_data])
         df = df.drop_duplicates()
     return df.drop_duplicates()
-    # return pd.concat([message_data,new_data]).drop_duplicates()
 
 
 async def get_all_members():
