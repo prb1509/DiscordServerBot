@@ -335,7 +335,7 @@ async def on_message(message):
             await message.channel.send(f"Welcome to the 10k club {message.author.mention}!")
     elif counter[message.author.name] % 1000 == 0:
         if counter[message.author.name] != 1000:
-            await message.channel.send(f"Hey {message.author.mention}. Looks like another 1000 messages. Nice?!?")
+            await message.channel.send(f"Hey {message.author.mention}. Looks like another 1000 messages. Nice!")
         else:
             await message.channel.send(f"Welcome to the 1k club {message.author.mention}!")
         
