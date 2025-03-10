@@ -326,8 +326,10 @@ async def on_message(message):
     if counter[message.author.name] % 100000 == 0:
         if counter[message.author.name] != 100000:
             await message.channel.send(f"Wow {message.author.mention}! Who would have thought you'd hit {counter[message.author.name]} messages?")
+            await message.channel.send("https://tenor.com/view/larissa-gif-24097569")
         else:
             await message.channel.send(f"Welcome to the 100k club {message.author.mention}!")
+            await message.channel.send("https://tenor.com/view/animals-boogerbear-luckycavity-bears-bear-gif-274926618517965193")
     elif counter[message.author.name] % 10000 == 0:
         if counter[message.author.name] != 10000:
             await message.channel.send(f"Hey {message.author.mention} you're on fire! That's another 10000 messages!")
@@ -338,6 +340,7 @@ async def on_message(message):
             await message.channel.send(f"Hey {message.author.mention}. Looks like another 1000 messages. Nice!")
         else:
             await message.channel.send(f"Welcome to the 1k club {message.author.mention}!")
+            await message.channel.send("https://tenor.com/view/batman-gif-25315750")
         
     # Save reasonably frequently
     if counter[message.author.name] % 25 == 0:
