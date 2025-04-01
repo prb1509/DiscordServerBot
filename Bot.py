@@ -161,7 +161,7 @@ async def reset_message_data(ctx):
     await ctx.send("Finished rewriting the data.")
 
 
-@client.command(name="serverstats")
+@client.command(name="server")
 async def time_series_server(ctx):
     await ctx.send("Working on it. Please be patient.")
     df = pd.DataFrame(await get_all_messages())
@@ -174,7 +174,7 @@ async def time_series_server(ctx):
     await ctx.send(f"Huff Puff! Number crunching is a lot of work!\n",file=image)
 
 
-@client.command(name="indstats")
+@client.command(name="user")
 async def time_series_individual(ctx,username=None):
     await ctx.send("Working on it. Please be patient.")
     df = pd.DataFrame(await get_all_messages())
@@ -194,7 +194,7 @@ async def time_series_individual(ctx,username=None):
         await ctx.send(f"Huff Puff! Number crunching is a lot of work!\n",file=image)
 
 
-@client.command(name="channelstats")
+@client.command(name="channel")
 async def time_series_channel(ctx,channel):
     channel = channel.lower()
     await ctx.send("Working on it. Please be patient.")
@@ -240,9 +240,9 @@ async def help(ctx,command_name=None):
         message = """Hello! This is a simple bot that keeps track of the number of messages posted in this server.
 Use / as a prefix to send a command. Commands are entirely **case insensitive**. The available commands are as follows:
 
-* serverstats
-* indstats
-* channelstats
+* server
+* user
+* channel
 * fixcounter
 * showcounter
 * resetmsg
@@ -251,26 +251,26 @@ To find out more about these commands you can type /info 'command'.
             
 Found a bug? Oops!"""
         
-    elif command_name == "serverstats":
+    elif command_name == "server":
         message = """A command to plot the message frequency of this server between 2023 and the current time.
         
 **Usage**: 
-/serverstats"""
+/server"""
         
-    elif command_name == "indstats":
+    elif command_name == "user":
         message = """A command to plot the message frequency of a discord user between 2023 and the current time.
         
 **Usage**: 
-/indstats username
+/user username
             
 **Options**: 
 username (*optional*) - discord username (the thing that originally had a 4 digit number)"""
 
-    elif command_name == "channelstats":
+    elif command_name == "channel":
         message = """A command to plot the message frequency of a channel between 2023 and the current time.
         
 **Usage**: 
-/channelstats channel
+/channel channel
             
 **Options**: 
 channel - discord channel"""
