@@ -322,7 +322,7 @@ async def on_message(message):
     if message.author.name not in counter.keys():
         counter[message.author.name] = 0
     counter[message.author.name] += 1
-    if counter[message.author.name] % 20 == 0:
+    if counter[message.author.name] % 50 == 0:
         save_counter_data(COUNTER_DATA,counter)
     await client.process_commands(message)
     if counter[message.author.name] % 100000 == 0:
